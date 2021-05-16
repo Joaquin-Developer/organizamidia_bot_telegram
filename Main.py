@@ -33,15 +33,21 @@ def echo(update, context):
     update.message.reply_text(update.message.text)
 
 def get_help_message():
-    route = ""
-    # return open(os.environ["PP_ROUTE"] + route).read()
-    return "Hola"
+    try:
+        route = ""
+        # return open(os.environ["PP_ROUTE"] + route).read()
+        return "Hola"
+    except Exception as e:
+        return str(e)
 
 def get_all_tasks_for_today(update, context):
-    text = update.message.text     # text from the user from telegram
-    username = text[5:len(text)]
-    message = ControllerTasks.get_all_tasks_for_today(username)
-    update.message.reply_text(message)   # text to resp
+    try:
+        text = update.message.text     # text from the user from telegram
+        username = text[5:len(text)]
+        message = ControllerTasks.get_all_tasks_for_today(username)
+        update.message.reply_text(message)   # text to resp
+    except Exception as e:
+        update.message.reply_text(str(e))
 
 def reply_message(update, context):
     if (update.message.text.lower().find("hol") >= 0):
