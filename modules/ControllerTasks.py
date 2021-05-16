@@ -14,7 +14,7 @@ def get_all_tasks_for_today(username):
             raise Exception("No se encontraron datos para el usuario indicado")
 
         dt = get_actual_date_for_user()
-        tasks_text = ""
+        tasks_text: str = ""
         
         for task in data:
             status = "Por Hacer" if task["status"] == 0 else "Finalizada"
@@ -28,6 +28,15 @@ def get_all_tasks_for_today(username):
         print(e)
         raise e
 
+def get_all_tasks_todo(username):
+    pass
+
+def get_all_task_for_this_week(username):
+    pass
+
+def get(username):
+    pass
+
 def get_actual_date():    
     return datetime.today().strftime('%Y-%m-%d')
 
@@ -35,6 +44,6 @@ def get_actual_date_for_user():
     dt = datetime.today().strftime('%Y-%m-%d').split("-")
     return "{}/{}/{}".format(dt[2], dt[1], dt[0])
 
-if __name__ == "__main__":
-    get_all_tasks_for_today("admin")
+# if __name__ == "__main__":
+#     get_all_tasks_for_today("admin")
     
