@@ -2,14 +2,14 @@ import requests, json
 
 def get_data():
     try:
-        req = requests.get("http://127.0.0.1:5000/test_get_all_questions_by_topic_Geografia")
+        resp = requests.get("http://127.0.0.1:5000/test_get_all_questions_by_topic_Geografia")
         print("Datos de la request:\n")
-        print("Estado: {}\n".format(req.status_code))
-        print("Headers: {}\n".format(req.headers))
-        print("JSON: {}\n".format(req.json))
-        print("Text: {}\n".format(req.text))
+        print("Estado: {}\n".format(resp.status_code))
+        print("Headers: {}\n".format(resp.headers))
+        print("JSON: {}\n".format(resp.json))
+        print("Text: {}\n".format(resp.text))
 
-        data = json.loads(req.text)
+        data = json.loads(resp.text)
         message = """Lista de tus tareas del día de hoy:\n\n"""
 
         for elem in data:

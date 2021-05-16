@@ -3,7 +3,7 @@
 # This program is dedicated to the public domain under the CC0 license.
 
 import logging, os, json, random
-from modules import *
+from modules import ControllerTasks
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 # Enable logging
@@ -28,9 +28,6 @@ def help_command(update, context):
 def fun(update, context):
     return None
 
-# more functions...
-
-
 def echo(update, context):
     # Echo the user message.
     update.message.reply_text(update.message.text)
@@ -39,6 +36,12 @@ def get_help_message():
     route = ""
     # return open(os.environ["PP_ROUTE"] + route).read()
     return "Hola"
+
+def get_all_tasks_for_today(update, context):
+    text = update.message.text     # text from the user from telegram
+    username = text[5:len(text)]
+    message = ControllerTasks.get_all_tasks_for_today(username)
+    update.message.reply_text(message)   # text to resp
 
 def reply_message(update, context):
     if (update.message.text.lower().find("hol") >= 0):
@@ -60,6 +63,7 @@ def main():
     # dp.add_handler(CommandHandler("clima", answer_weather))
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("ayuda", help_command))
+    dp.add_handler(CommandHandler("hoy", get_all_tasks_for_today))
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text & ~Filters.command, reply_message))
     # Start the Bot
